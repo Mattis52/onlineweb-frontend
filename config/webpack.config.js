@@ -84,6 +84,7 @@ module.exports = env => {
       new webpack.DefinePlugin({
         'process.env': {
           OW4_ADDRESS: JSON.stringify(process.env.OW4_ADDRESS),
+          OW4_SSO_CLIENT_ID: JSON.stringify(process.env.OW4_SSO_CLIENT_ID),
         },
       }),
     ]
