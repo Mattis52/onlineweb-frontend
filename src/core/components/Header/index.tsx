@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { STATIC_URL } from 'common/constants/endpoints';
 import { routes } from 'App';
 import MainSponsor from './MainSponsor';
 import HeaderLogo from './HeaderLogo';
-import Authenticate from 'authentication/components/Authenticate';
 import style from './header.less';
+import HeaderLogin from './Login'
 
 export const Header = () => (
   <header className={style.header}>
@@ -16,10 +15,9 @@ export const Header = () => (
         <Link to={routes.career}>Karriere</Link>
         <Link to={routes.resources}>Ressurser</Link>
         <Link to={routes.hobbygroups}>Interessegrupper</Link>
-        <Authenticate authentication={'view_wiki'}>
-          <Link to={routes.wiki}>Wiki</Link>
-        </Authenticate>
+        <Link to={routes.wiki}>Wiki</Link>
         <Link to={routes.webshop}>Webshop</Link>
+        <HeaderLogin />
       </div>
       <MainSponsor />
     </div>
