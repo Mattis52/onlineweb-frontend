@@ -4,7 +4,7 @@ import { routes } from 'App';
 import MainSponsor from './MainSponsor';
 import HeaderLogo from './HeaderLogo';
 import style from './header.less';
-import HeaderLogin from './Login'
+import HeaderLogin from './Login';
 
 export const Header = () => (
   <header className={style.header}>

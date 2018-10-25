@@ -26,8 +26,8 @@ export const routes = {
   wiki: '/wiki',
   webshop: '/webshop',
   profile: '/profile',
-  authCallback: '/auth/callback'
-}
+  authCallback: '/auth/callback',
+};
 
 const history = createBrowserHistory();
 
