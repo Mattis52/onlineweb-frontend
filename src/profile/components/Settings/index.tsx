@@ -5,6 +5,7 @@ import HttpError from 'core/components/errors/HttpError';
 import { IProfileProps } from 'profile';
 import Mails from './Mails';
 import Menu from './Menu';
+import Notifications from './Notifications';
 import Penalties from './Penalties';
 import Privacy from './Privacy';
 import style from './settings.less';
@@ -18,6 +19,7 @@ export const routes = {
   privacy: BASE_ROUTE + '/privacy',
   mail: BASE_ROUTE + '/mail',
   password: BASE_ROUTE + '/password',
+  notifications: BASE_ROUTE + '/notifications',
 };
 
 const Settings = (_: IProfileProps) => {
@@ -28,6 +30,7 @@ const Settings = (_: IProfileProps) => {
       <SettingsRoute path={routes.privacy} view={Privacy} />
       <SettingsRoute path={routes.mail} view={Mails} />
       <SettingsRoute path={routes.password} view={Privacy} />
+      <SettingsRoute path={routes.notifications} view={Notifications} />
       <Route path="*" render={() => <HttpError code={404} text="Undersiden du leter etter finnes ikke" />} />
     </Switch>
   );

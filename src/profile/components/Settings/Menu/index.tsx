@@ -14,6 +14,7 @@ const Menu = ({ path }: IProps) => (
     <Tab path={routes.password} active={path === routes.password} text="Passord" />
     <Tab path={routes.penalties} active={path === routes.penalties} text="Prikker og suspensjoner" />
     <Tab path={routes.privacy} active={path === routes.privacy} text="Personvern" />
+    <Tab path={routes.notifications} active={path === routes.notifications} text="Notifikasjoner" />
   </div>
 );
 
