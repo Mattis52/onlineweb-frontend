@@ -1,6 +1,6 @@
 # Onlineweb Frontend
 
-![Onlineweb Frontend Logo](src/common/img/owf-logo.png?raw=true "Onlineweb Frontend Logo")
+<img src="src/common/img/owf-logo.png?raw=true" width="240">
 
 ## How to run
 
