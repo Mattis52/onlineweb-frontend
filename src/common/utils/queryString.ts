@@ -1,17 +1,11 @@
+import queryString from 'query-string';
 /**
  * TODO: Add validation
- * @param {object} queryObject e.g. {foo: 'bar', hello: 'world'}
+ * @param {IQueryObject} queryObject e.g. {foo: 'bar', hello: 'world'}
  * @return {string} e.g. ?foo=bar&hello=world
  */
-export const toQueryString = (queryObject: any): string => {
-  const keys = Object.keys(queryObject);
-  if (!keys.length) {
-    return '';
-  }
-  const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
-  const string = `?${queries.join('&')}`;
-  // console.log(`[queryString] object: ${JSON.stringify(queryObject)}, string: ${string}`)
-  return string;
+export const toQueryString = (queryObject: IQueryObject): string => {
+  return `?queryString.stringify(queryObject)`;
 };
 
 export interface IQueryObject {
@@ -21,27 +15,8 @@ export interface IQueryObject {
 /**
  * TODO: Add validation
  * @param {string} queryString e.g. ?foo=bar&hello=world
- * @return {object} e.g. {foo: 'bar', hello: 'world'}
+ * @return {IQueryObject} e.g. {foo: 'bar', hello: 'world'}
  */
-export const toQueryObject = (queryString: string): IQueryObject => {
-  if (queryString.startsWith('?')) {
-    queryString = queryString.substring(1);
-  }
-  /*let queryObject: IQueryObject = {}
-  for (const query of queryString.split('&')) {
-    const pair = query.split('=');
-    queryObject[pair[0]] = pair[1];
-  }*/
-  const queryObject = queryString
-    .split('&')
-    .map((query: string) => {
-      const pair = query.split('=');
-      return { [pair[0]]: pair[1] };
-    })
-    .reduce((accumulator, query) => {
-      accumulator[query.key] = query[query.key];
-      return accumulator;
-    });
-
-  return queryObject;
+export const toQueryObject = (query: string): IQueryObject => {
+  return queryString.parse(query);
 };
