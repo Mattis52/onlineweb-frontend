@@ -4,6 +4,10 @@ import Block from './Block';
 import { DateTime } from 'luxon';
 import styles from './detail.less';
 
+import { UserContext } from 'authentication/providers/UserProvider'
+
+import { attendEvent } from '../../api/events';
+
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
 }
@@ -34,11 +38,11 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
   );
 };
 
-const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
+const AttendanceEvent = ({ event, user }: IAttendanceEventProps) => {
   const registrationStart = DateTime.fromISO(event.registration_start).toFormat('d MMM hh:mm');
   const registrationEnd = DateTime.fromISO(event.registration_end).toFormat('d MMM hh:mm');
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline).toFormat('d MMM hh:mm');
-
+  const attendButton = (user ? <button onClick={() => attendEvent(event, user) }>Meld meg på</button> : <p>Log deg inn for å melde deg på</p>);
   return (
     <div className={styles.blockGrid}>
       <Block title="Påmeldingsstart">
@@ -48,6 +52,8 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
       <Block title="Påmeldingslutt">
         <p>{registrationEnd}</p>
       </Block>
+
+      {attendButton}
 
       <Block title="Avmeldingsfrist">
         <p>{cancellationDeadline}</p>
@@ -66,4 +72,11 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   );
 };
 
-export default AttendanceEvent;
+export default ({...props}) => {
+  console.log(props);
+  return (
+    <UserContext.Consumer>
+      {(context) => <AttendanceEvent {...props} user={context.user} />}
+    </UserContext.Consumer>
+  )
+};

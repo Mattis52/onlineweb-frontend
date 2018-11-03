@@ -21,6 +21,7 @@ class UserProvider extends Component<{}, IUserContext> {
   };
 
   public completeLogin = (user: IAuthUser) => {
+    console.log(user);
     this.setState({ user });
   }
 
