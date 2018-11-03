@@ -10,7 +10,7 @@ export interface IProps extends IState {
   children: JSX.Element;
   alt?: JSX.Element;
   authentication: IGroup | Permission;
-}
+};
 
 export const mapStateToProps = (state: IState): IState => {
   return { user: new AuthUser(state.user) };

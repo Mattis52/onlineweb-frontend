@@ -1,6 +1,14 @@
 import settings from './settings';
 import { UserManager, User } from 'oidc-client';
 
+import { asyncProvider, createResourceType } from 'common/resource';
+import AuthCallback from 'authentication/components/AuthCallback';
+
+
+export const UserResourceType = createResourceType('ow4.user')
+
+
+
 const MANAGER = new UserManager(settings);
 
 /**
@@ -23,3 +31,6 @@ export const authCallback = async (): Promise<User> => {
   const user = await MANAGER.signinRedirectCallback();
   return user;
 };
+
+export const UserResourceProvider = asyncProvider(authCallback);
+

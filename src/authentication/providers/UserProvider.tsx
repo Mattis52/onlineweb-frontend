@@ -2,6 +2,7 @@ import React, { Component, createContext, Context } from 'react';
 import { IAuthUser } from '../models/User';
 import { User } from 'oidc-client';
 
+
 export interface IUserContext {
   user?: IAuthUser;
   setUser: (auth: IAuthUser) => void;

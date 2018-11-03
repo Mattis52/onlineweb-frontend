@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { authCallback } from '../api';
+import { UserResourceType } from '../api';
 import { injectUserContext, IUserContext, UserContext } from '../providers/UserProvider';
+
+import ResourceManager from 'common/resource/ResourceManager';
+
 
 export interface IProps {
   auth?: IUserContext;
@@ -10,8 +13,8 @@ class AuthCallback extends Component<IProps> {
   public async componentDidMount() {
     const { auth } = this.props;
     if (auth) {
-      const user = await authCallback();
-      auth.setUser(user);
+      const resource = await ResourceManager.getResource(UserResourceType);
+      auth.setUser(resource.value);
     }
   }
 
