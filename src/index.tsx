@@ -13,7 +13,7 @@ Sentry.init({
 });
 
 const render = (RootComponent: any) => {
-  ReactDOM.render(<RootComponent />, document.getElementById('root'));
+  ReactDOM.hydrate(<RootComponent />, document.getElementById('root'));
 };
 
 render(App);
