@@ -52,6 +52,6 @@ export const App = () => (
       <Route path="*" render={() => <HttpError code={404} />} />
     </Switch>
   </Core>
-)
+);
 
 export default App;
