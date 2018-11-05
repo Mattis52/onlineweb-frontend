@@ -14,6 +14,32 @@ Sentry.init({
   dsn: OWF_SENTRY_DSN,
 });
 
+interface IErrorInfo extends ErrorInfo {
+  [key: string]: string;
+}
+
+const history = createBrowserHistory();
+
+export default class Root extends Component {
+  public componentDidCatch(error: Error, errorInfo: IErrorInfo) {
+    Sentry.withScope((scope) => {
+      Object.keys(errorInfo).forEach((key) => {
+        scope.setExtra(key, errorInfo[key]);
+      });
+
+      Sentry.captureException(error);
+    });
+  }
+
+  public render() {
+    return (
+      <Router history={history}>
+        <App />
+      </Router>
+    );
+  }
+}
+
 const render = (RootComponent: any) => {
   ReactDOM.hydrate(<RootComponent />, document.getElementById('root'));
 };

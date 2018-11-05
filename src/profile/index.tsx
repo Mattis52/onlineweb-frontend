@@ -1,6 +1,5 @@
 import HttpError from 'core/components/errors/HttpError';
 import { History } from 'history';
-import 'multirange';
 import qs from 'query-string';
 import React from 'react';
 import { Route, RouteProps, Switch } from 'react-router-dom';
