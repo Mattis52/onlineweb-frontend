@@ -6,7 +6,9 @@ import * as ReactDOM from 'react-dom';
 
 Settings.defaultLocale = 'nb';
 
-import App from 'App';
+import App from './App';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 Sentry.init({
   dsn: OWF_SENTRY_DSN,
@@ -16,7 +18,7 @@ const render = (RootComponent: any) => {
   ReactDOM.hydrate(<RootComponent />, document.getElementById('root'));
 };
 
-render(App);
+render(Root);
 
 if (module.hot) {
   module.hot.accept('./App', () => {
