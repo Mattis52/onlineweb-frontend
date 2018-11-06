@@ -51,7 +51,7 @@ module.exports = env => {
           test: /\.less$/,
           use: [
             {
-              loader: "style-loader"
+              loader: MiniCssExtractPlugin.loader
             },
             {
               loader: "typings-for-css-modules-loader",
@@ -68,7 +68,7 @@ module.exports = env => {
               options: {
                 ident: 'postcss',
                 plugins: () => [
-                  postcssFocusVisible(/* pluginOptions */)
+                  postcssFocusVisible({ preserve: true })
                 ]
               }
             },
