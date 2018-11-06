@@ -5,7 +5,6 @@ import Search from './components/Search';
 import Settings from './components/Settings';
 import MainMenu from './components/MainMenu';
 import HttpError from 'core/components/errors/HttpError';
-import AccessCard from './components/AccessCard';
 import 'multirange';
 import qs from 'query-string';
 import { History } from 'history';
