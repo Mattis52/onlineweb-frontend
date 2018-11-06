@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require('webpack');
+const postcssFocusVisible = require('postcss-focus-visible');
+
 
 module.exports = env => {
   return {
@@ -59,6 +61,15 @@ module.exports = env => {
                 localIdentName: "[local]___[hash:base64:5]",
                 namedExport: true,
                 camelCase: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: () => [
+                  postcssFocusVisible(/* pluginOptions */)
+                ]
               }
             },
             {

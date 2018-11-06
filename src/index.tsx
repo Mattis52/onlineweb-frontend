@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/browser';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+import 'focus-visible/dist/focus-visible.js';
 import { Settings } from 'luxon';
 import React, { Component, ErrorInfo } from 'react';
 import * as ReactDOM from 'react-dom';
