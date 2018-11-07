@@ -8,8 +8,8 @@ import { faSortDown } from '@fortawesome/free-solid-svg-icons/faSortDown';
 
 export interface IProps {
   selected: string | undefined;
-  groups: IGroup[];
-  onClick: (g: IGroup) => boolean;
+  groups: string[];
+  onClick: (g: string) => void;
 }
 
 class Dropdown extends Collapsible<IProps> {
@@ -26,15 +26,15 @@ class Dropdown extends Collapsible<IProps> {
         ) : (
           groups.map((group) => (
             <Item
-              key={group.name}
-              selected={group.name === selected}
+              key={group}
+              selected={group === selected}
               className={style.dropped}
               onClick={() => {
                 onClick(group);
                 this.toggleCollapse();
               }}
             >
-              <h4>{group.name}</h4>
+              <h4>{group}</h4>
             </Item>
           ))
         )}

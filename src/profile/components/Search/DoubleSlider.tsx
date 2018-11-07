@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import style from './search.less';
 
 export interface IProps {
-  range: [number, number];
-  onChange: (range: [number, number]) => boolean;
+  range: string;
+  onChange: (range: string) => void;
 }
 
 export interface IState {
@@ -16,7 +16,7 @@ class DoubleSlider extends Component<IProps, IState> {
   };
 
   public submit() {
-    this.props.onChange(this.state.range);
+    this.props.onChange(this.state.range[0].toString());
   }
 
   public setRange1(n: number) {

@@ -6,14 +6,15 @@ import DoubleSlider from './DoubleSlider';
 import { getGroups } from '../../api/groups';
 import style from './search.less';
 
-export interface IProps extends ISearchFilter {
-  setName: (s: string) => boolean;
-  setGroup: (g: IGroup) => boolean;
-  setYear: (y: [number, number]) => boolean;
+export interface IProps {
+  setParam: (k: string, v: string) => void;
+  search: string;
+  group: string;
+  year: string;
 }
 
 export interface IState {
-  groups: IGroup[];
+  groups: string[];
 }
 
 class Searchbar extends Component<IProps, IState> {
@@ -27,13 +28,18 @@ class Searchbar extends Component<IProps, IState> {
   }
 
   public render() {
-    const { name, group, year, setName, setGroup, setYear } = this.props;
+    const { search, group, year, setParam } = this.props;
     const { groups } = this.state;
     return (
       <form className={style.grid}>
-        <input className={style.searchInput} type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        <Dropdown selected={group} onClick={(g: IGroup) => setGroup(g)} groups={groups} />
-        <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)} />
+        <input
+          className={style.searchInput}
+          type="text"
+          value={name}
+          onChange={({ target }) => setParam('search', target.value)}
+        />
+        <Dropdown selected={group} onClick={(g: string) => setParam('group', g)} groups={groups} />
+        <DoubleSlider range={year} onChange={(range: string) => setParam('year', range)} />
       </form>
     );
   }
