@@ -62,3 +62,12 @@ li {
 :focus:not(:focus-visible) {
   outline: none;
 }
+
+:focus:not(.focus-visible) {
+  outline: none;
+}
+
+:global(.focus-visible) {
+  outline: 2px solid #faa21b !important;
+  outline-offset: 1px;
+}
