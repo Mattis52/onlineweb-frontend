@@ -6,11 +6,11 @@
   display: block;
   position: relative;
   padding: 10px;
+  width: 100%;
 }
 
 .mail-input-group label {
   padding: 12px 30px;
-  width: 100%;
   display: block;
   text-align: left;
   color: #3c454c;
@@ -22,7 +22,7 @@
 }
 
 .mail-input-group label::before {
-  width: 10px;
+  width: 100%;
   height: 10px;
   border-radius: 50%;
   content: '';
@@ -41,14 +41,13 @@
   content: '';
   border: 2px solid #d1d7dc;
   .owCard();
-
+  right: 5px;
   background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
   background-repeat: no-repeat;
   background-position: 2px 3px;
   border-radius: 50%;
   z-index: 2;
   position: absolute;
-  right: 30px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
