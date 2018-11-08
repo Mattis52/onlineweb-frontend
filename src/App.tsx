@@ -58,7 +58,8 @@ export const App = () => (
 declare global {
   // tslint:disable-next-line interface-name
   interface Window {
-    __INITIAL_PROVIDER_STATE__: IServerStateCache;
+    /** String that resolves to an IServerStateCache object/interface!! */
+    __INITIAL_PROVIDER_STATE__: string;
   }
 }
 

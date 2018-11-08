@@ -1,4 +1,5 @@
 import Heading from 'common/components/Heading';
+import { getStateCache } from 'common/utils/stateCacheResolver';
 import React, { Component } from 'react';
 import { getOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
@@ -19,7 +20,7 @@ const DISPLAY_NUMBER = 5;
 
 class Offline extends Component<IProps, IState> {
   public state: IState = {
-    offlines: [],
+    offlines: getStateCache().offline,
     index: 0,
     page: 1,
     loadAll: true,
