@@ -11,5 +11,5 @@ export const getOfflines = async (page: number = 1): Promise<IOfflineIssue[]> =>
 
 export const getServerCacheOfflines = (): IOfflineIssue[] => {
   const cache = getStateCache();
-  return cache && cache.offline || [];
+  return (cache && cache.offline) || [];
 };

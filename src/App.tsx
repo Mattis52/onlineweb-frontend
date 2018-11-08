@@ -1,10 +1,6 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-<<<<<<< HEAD
-import { Route, Router, Switch } from 'react-router-dom';
-=======
 import { Route, Switch } from 'react-router-dom';
->>>>>>> Make separate routing config for client and server
 
 import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
