@@ -1,50 +1,37 @@
 import * as Sentry from '@sentry/browser';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
-import { Settings } from 'luxon';
+import Settings from 'core/providers/Settings';
+import { createBrowserHistory } from 'history';
+import cookies from 'js-cookie';
+import { Settings as LuxonSettings } from 'luxon';
 import React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
 
-Settings.defaultLocale = 'nb';
+LuxonSettings.defaultLocale = 'nb';
 
 import App from './App';
-import { createBrowserHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { getEventView } from 'events/components/EventsContainer';
 
 Sentry.init({
   dsn: OWF_SENTRY_DSN,
 });
 
-interface IErrorInfo extends ErrorInfo {
-  [key: string]: string;
-}
-
 const history = createBrowserHistory();
 
-export default class Root extends Component {
-  public componentDidCatch(error: Error, errorInfo: IErrorInfo) {
-    Sentry.withScope((scope) => {
-      Object.keys(errorInfo).forEach((key) => {
-        scope.setExtra(key, errorInfo[key]);
-      });
-
-      Sentry.captureException(error);
-    });
-  }
-
-  public render() {
-    return (
-      <Router history={history}>
-        <App />
-      </Router>
-    );
-  }
-}
-
 const render = (RootComponent: any) => {
-  ReactDOM.hydrate(<RootComponent />, document.getElementById('root'));
+  const eventView = getEventView(cookies.get('eventView'));
+  console.log(eventView);
+  ReactDOM.hydrate(
+    <Router history={history}>
+      <Settings eventView={eventView}>
+        <RootComponent />
+      </Settings>
+    </Router>
+  , document.getElementById('root'));
 };
 
-render(Root);
+render(App);
 
 if (module.hot) {
   module.hot.accept('./App', () => {
