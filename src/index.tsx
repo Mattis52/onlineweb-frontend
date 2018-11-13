@@ -11,7 +11,6 @@ import { Settings as LuxonSettings } from 'luxon';
 import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
-import { EMPTY_STATE_CACHE } from 'server/stateCache';
 
 LuxonSettings.defaultLocale = 'nb';
 
@@ -24,8 +23,7 @@ Sentry.init({
 const history = createBrowserHistory();
 
 const render = (RootComponent: any) => {
-  const cache = getStateCache() || EMPTY_STATE_CACHE;
-  console.log(cache)
+  const cache = getStateCache();
   const eventView = getEventView(cookies.get('eventView'));
   /** Define renderer to use, hydrate if SSR back-end is enabled, render if no back-end */
   const reactRender = __SSR__ ? ReactDOM.render : ReactDOM.hydrate;
