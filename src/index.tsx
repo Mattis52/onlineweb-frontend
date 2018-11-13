@@ -1,6 +1,8 @@
 import * as Sentry from '@sentry/browser';
 import { __SSR__ } from 'common/constants/environment';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+import { getStateCache } from 'common/utils/stateCacheResolver';
+import ContextWrapper from 'core/providers/ContextWrapper';
 import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import { createBrowserHistory } from 'history';
@@ -9,6 +11,7 @@ import { Settings as LuxonSettings } from 'luxon';
 import React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
+import { EMPTY_STATE_CACHE } from 'server/stateCache';
 
 LuxonSettings.defaultLocale = 'nb';
 
@@ -21,13 +24,17 @@ Sentry.init({
 const history = createBrowserHistory();
 
 const render = (RootComponent: any) => {
+  const cache = getStateCache() || EMPTY_STATE_CACHE;
+  console.log(cache)
   const eventView = getEventView(cookies.get('eventView'));
   /** Define renderer to use, hydrate if SSR back-end is enabled, render if no back-end */
   const reactRender = __SSR__ ? ReactDOM.render : ReactDOM.hydrate;
   reactRender(
     <Router history={history}>
       <Settings eventView={eventView}>
-        <RootComponent />
+        <ContextWrapper {...cache}>
+          <RootComponent />
+        </ContextWrapper>
       </Settings>
     </Router>,
     document.getElementById('root')
