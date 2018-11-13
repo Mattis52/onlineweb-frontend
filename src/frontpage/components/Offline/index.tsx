@@ -1,4 +1,5 @@
 import Heading from 'common/components/Heading';
+import { IOfflineIssuesState, OfflineContext } from 'frontpage/providers/OfflineIssues';
 import React, { Component } from 'react';
 import { getOfflines, getServerCacheOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
@@ -9,7 +10,6 @@ import OfflineCarousel from './OfflineCarousel';
 export interface IProps {}
 
 export interface IState {
-  offlines: IOfflineIssue[];
   index: number;
   page: number;
   loadAll: boolean;
@@ -18,17 +18,16 @@ export interface IState {
 const DISPLAY_NUMBER = 5;
 
 class Offline extends Component<IProps, IState> {
+  public static contextType = OfflineContext;
   public state: IState = {
-    offlines: getServerCacheOfflines(),
     index: 0,
     page: 1,
     loadAll: true,
   };
 
   public async componentDidMount() {
-    const { page } = this.state;
-    const offlines = await getOfflines(page);
-    this.setState({ offlines });
+    const { init }: IOfflineIssuesState = this.context;
+    init();
   }
 
   public async fetchAll() {
@@ -36,19 +35,12 @@ class Offline extends Component<IProps, IState> {
   }
 
   public async clickNext(amount: number) {
-    const { index, offlines, loadAll } = this.state;
-    if (loadAll) {
-      this.fetchAll();
-      this.setState({ loadAll: false });
-    }
-    const i = index + amount;
-    if (i >= 0 && i <= offlines.length) {
-      this.setState({ index: i });
-    }
+    const { index, loadAll } = this.state;
   }
 
   public render() {
-    const { offlines, index } = this.state;
+    const { index, page } = this.state;
+    const { offlines }: IOfflineIssuesState = this.context;
     const start = index;
     const end = start + DISPLAY_NUMBER;
     return (
