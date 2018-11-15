@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = (env) => {
   return {
@@ -104,6 +105,7 @@ module.exports = (env) => {
         OWF_SENTRY_DSN: '',
         NODE_ENV: 'development',
       }),
+      new ForkTsCheckerWebpackPlugin(),
     ],
   };
 };
