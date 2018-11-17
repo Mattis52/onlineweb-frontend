@@ -15,7 +15,6 @@ import Hobbys from './hobbygroups';
 import Resources from './resources';
 
 import Spinner from 'common/components/Spinner';
-import { IServerStateCache } from 'server/stateCache';
 
 export const routes = {
   events: '/events',
@@ -36,19 +35,21 @@ const LoadableProfile = Loadable({
 });
 
 export const App = () => (
-  <Core>
-    <Switch>
-      <Route exact path={routes.home} component={Frontpage} />
-      <Route path={routes.events} component={EventsRouter} />
-      <Route path={routes.career} component={Career} />
-      <Route path={routes.contribution} component={Contribution} />
-      <Route path={routes.hobbygroups} component={Hobbys} />
-      <Route path={routes.resources} component={Resources} />
-      <Route path={routes.profile} component={LoadableProfile} />
-      <Route path={routes.authCallback} component={AuthCallback} />
-      <Route path="*" render={() => <HttpError code={404} />} />
-    </Switch>
-  </Core>
+  <AuthProvider>
+    <Core>
+      <Switch>
+        <Route exact path={routes.home} component={Frontpage} />
+        <Route path={routes.events} component={EventsRouter} />
+        <Route path={routes.career} component={Career} />
+        <Route path={routes.contribution} component={Contribution} />
+        <Route path={routes.hobbygroups} component={Hobbys} />
+        <Route path={routes.resources} component={Resources} />
+        <Route path={routes.profile} component={LoadableProfile} />
+        <Route path={routes.authCallback} component={AuthCallback} />
+        <Route path="*" render={() => <HttpError code={404} />} />
+      </Switch>
+    </Core>
+  </AuthProvider>
 );
 
 declare global {
