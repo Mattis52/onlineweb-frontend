@@ -1,8 +1,6 @@
 import Heading from 'common/components/Heading';
 import { IOfflineIssuesState, OfflineContext } from 'frontpage/providers/OfflineIssues';
 import React, { Component } from 'react';
-import { getOfflines, getServerCacheOfflines } from '../../api/offline';
-import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import style from './offline.less';
 import OfflineCarousel from './OfflineCarousel';
@@ -34,12 +32,12 @@ class Offline extends Component<IProps, IState> {
     this.setState({});
   }
 
-  public async clickNext(amount: number) {
-    const { index, loadAll } = this.state;
+  public async clickNext(_: number) {
+    /** */
   }
 
   public render() {
-    const { index, page } = this.state;
+    const { index } = this.state;
     const { offlines }: IOfflineIssuesState = this.context;
     const start = index;
     const end = start + DISPLAY_NUMBER;
