@@ -55,8 +55,8 @@ export const App = () => (
 declare global {
   // tslint:disable-next-line interface-name
   interface Window {
-    /** String that resolves to an IServerStateCache object/interface!! */
-    __INITIAL_PROVIDER_STATE__: string;
+    /** String that resolves to a prefetched state */
+    __PREFETCHED_STATE__: string;
   }
 }
 
