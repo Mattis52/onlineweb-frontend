@@ -11,7 +11,9 @@ class AuthCallback extends Component<IProps> {
     const { auth } = this.props;
     if (auth) {
       const user = await authCallback();
-      auth.setUser(user);
+      if (user) {
+        auth.setUser(user);
+      }
     }
   }
 
